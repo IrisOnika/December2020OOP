@@ -1,5 +1,13 @@
 import math
-from fig_class import Fig
+from figure.fig_class import Fig
+
+
+class NotPositiveSideError(Exception):
+    """Вызвывается, когда задано не положительное число"""
+    
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
 
 
 class Rectangle(Fig):
@@ -9,8 +17,16 @@ class Rectangle(Fig):
     angles = 4
 
     def __init__(self, a: float, b: float):
-        self.a = a
-        self.b = b
+        try:
+            if a > 0 and b > 0:
+                self.a = a
+                self.b = b
+            else:
+                raise NotPositiveSideError('одна из сторон не является положительным числом')
+        except AttributeError as er:
+            print(er)
+        except TypeError as er:
+            print(er)
 
     def get_a(self):
         return self.a
@@ -19,12 +35,18 @@ class Rectangle(Fig):
         return self.b
 
     def area(self):
-        s = self.a * self.b
-        return print(f'Площадь прямоугольника равна {s}')
+        if self.a > 0 and self.b > 0:
+            s = self.a * self.b
+            return s
+        else:
+            return 'параметры фигуры заданы некорректно'
 
     def perimeter(self):
-        p = 2*(self.a + self.b)
-        return print(f'Периметр прямоугольника равен {p}')
+        if self.a > 0 and self.b > 0:
+            p = 2*(self.a + self.b)
+            return p
+        else:
+            return 'параметры фигуры заданы некорректно'
 
     def info(self):
         if self.a > 0:
@@ -42,19 +64,27 @@ class Square(Fig):
     name = 'square'
     angles = 4
 
-    def __init__(self, a):
-        self.a = a
+    def __init__(self, a: float):
+        try:
+            if a > 0:
+                self.a = a
+            else:
+                raise NotPositiveSideError('сторона не является положительным числом')
+        except AttributeError as er:
+            print(er)
+        except TypeError as er:
+            print(er)
 
     def get_a(self):
         return self.a
 
     def area(self):
         s = self.a ** 2
-        return print(f'Площадь квадрата равна {s}')
+        return s
 
     def perimeter(self):
         p = 4 * self.a
-        return print(f'Периметр квадрата равен {p}')
+        return p
 
     def info(self):
         if self.a > 0:
@@ -85,11 +115,11 @@ class Triangle(Fig):
     def area(self):
         half_p = (self.a + self.b + self.c) / 2.0
         s = (half_p * (half_p - self.a) * (half_p - self.b) * (half_p - self.c)) ** 0.5
-        return print(f'Площадь квадрата равна {s}')
+        return s
 
     def perimeter(self):
         p = self.a + self.b + self.c
-        return print(f'Периметр квадрата равен {p}')
+        return p
 
     def info(self):
         if self.a > 0:
@@ -121,11 +151,11 @@ class Circle(Fig):
 
     def area(self):
         s = math.pi * (self.a ** 2)
-        return print(f'Площадь круга равна {s}')
+        return s
 
     def perimeter(self):
         p = 2 * math.pi * self.a
-        return print(f'Периметр круга равен {p}')
+        return p
 
     def info(self):
         if self.a > 0:

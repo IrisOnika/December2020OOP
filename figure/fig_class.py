@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from figs import Rectangle, Square, Circle, Triangle
 
 
 class Fig(ABC):
@@ -16,46 +15,21 @@ class Fig(ABC):
     def perimeter(self):
         pass
 
-    @abstractmethod
-    def angles(self):
-        pass
-
-    def add_area(self, name, a, b=None, c=None):
-
-        if name == 'rectangle':
-            new_fig = Rectangle(a, b)
-            if new_fig.info() == f'прямоугольник со сторонами {new_fig.get_a()}, {new_fig.get_b()}':
-                return print(f'площадь двух фигур равна {self.area() + new_fig.area()}')
+    def add_area(self, new_fig):
+        if str(type(new_fig)) == "<class 'figure.figs.Rectangle'>" \
+                or str(type(new_fig)) == "<class 'figure.figs.Square'>" \
+                or str(type(new_fig)) == "<class 'figure.figs.Triangle'>" \
+                or str(type(new_fig)) == "<class 'figure.figs.Circle'>":
+            if self.area() != 'параметры фигуры заданы некорректно':
+                if new_fig.area != 'параметры фигуры заданы некорректно':
+                    print(self.area())
+                    print(new_fig.area())
+                    new_area = self.area() + new_fig.area()
+                    return new_area
+                else:
+                    print(new_fig.area())
+                    return 'параметры новой фигуры заданы некорретно'
             else:
-                return new_fig.info()
-        elif name == 'square':
-            new_fig = Square(a)
-            if new_fig.info() == f'квадрат со сторонами {new_fig.get_a()}':
-                return print(f'площадь двух фигур равна {self.area() + new_fig.area()}')
-            else:
-                return new_fig.info()
-        elif name == 'circle':
-            new_fig = Circle(a)
-            if new_fig.info() == f'круг с радиусом {new_fig.get_a}':
-                return print(f'площадь двух фигур равна {self.area() + new_fig.area()}')
-            else:
-                return new_fig.info()
-        elif name == 'triangle':
-            new_fig = Triangle(a, b, c)
-            if new_fig.info() == f'треугольник со сторонами {new_fig.get_a}, {new_fig.get_b}, {new_fig.get_c}':
-                return print(f'площадь двух фигур равна {self.area() + new_fig.area()}')
-            else:
-                return new_fig.info()
+                return 'параметры исходной фигуры заданы некорретно'
         else:
-            return print("задайте одну из следующих фигур: "
-                         "прямоугольник - 'rectangle', квадрат - 'square', круг - 'circle', треугольник - 'triangle'")
-
-
-
-
-
-
-
-
-
-        pass
+            return 'Ошибка. В метод передана не фигура'
