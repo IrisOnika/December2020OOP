@@ -5,11 +5,13 @@ import math
 
 
 def test_check_name():
+    """Проверка имени фигуры"""
     fig = Rectangle(3, 4)
     assert fig.name == 'rectangle'
 
 
 def test_check_angles():
+    """Проверка кол-ва углов фигуры"""
     fig = Rectangle(3, 4)
     assert fig.angles == 4
 
@@ -23,7 +25,7 @@ def test_check_angles():
                           ('skip', 'skip', "__init__() missing 1 required positional argument: 'b'")
                           ])
 def test_exceptions(a, b, ex):
-    Rectangle(1, 'a')
+    """Проверка возможных исключений при создании фигуры"""
     try:
         if b == 'skip':
             Rectangle(a)
@@ -44,12 +46,10 @@ def test_exceptions(a, b, ex):
 
 
 @pytest.mark.parametrize(("a", "b", "area"), [(1, 2, 2),
-                                              (3, 4, 12)
-                                            ])
+                                              (3, 4, 12)])
 def test_area(a, b, area):
+    """Проверка метода площади фигуры"""
     fig = Rectangle(a, b)
-    print(fig)
-    print(fig.area())
     assert fig.area() == area
 
 
@@ -58,6 +58,7 @@ def test_area(a, b, area):
                           (3, 4, 14)
                           ])
 def test_perimeter(a, b, perimeter):
+    """Проверка метода периметра фигуры"""
     fig = Rectangle(a, b)
     assert fig.perimeter() == perimeter
 
@@ -71,7 +72,7 @@ def test_perimeter(a, b, perimeter):
                              (1, 1, 44, 'Ошибка. В метод передана не фигура')
                          ])
 def test_add_area(a, b, new_fig, new_area):
+    """Проверка метода добавления площади новой фигуры к площади текущей фигуры"""
     fig = Rectangle(a, b)
     add_a = fig.add_area(new_fig)
     assert add_a == new_area
-

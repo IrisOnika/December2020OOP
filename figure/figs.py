@@ -10,6 +10,14 @@ class NotPositiveSideError(Exception):
         super().__init__(self.message)
 
 
+class IncorrectTriangleSideError(Exception):
+    """Вызывается, когда две стороны треугольника меньше третьей"""
+
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+
+
 class Rectangle(Fig):
     """класс прямоугольник. для создания нужно задать длину двух перпендикулярных сторон"""
 
@@ -99,9 +107,24 @@ class Triangle(Fig):
     angles = 3
 
     def __init__(self, a: float, b: float, c: float):
-        self.a = a
-        self.b = b
-        self.c = c
+        try:
+            if a > 0 and b > 0 and c > 0:
+                if (a + b > c) and (a + c > b) and (b + c > a):
+                    self.a = a
+                    self.b = b
+                    self.c = c
+                else:
+                    print(1)
+                    raise IncorrectTriangleSideError('сумма двух сторон треугольника меньше третьей')
+            else:
+                print(2)
+                raise NotPositiveSideError('одна из сторон треугольнака не является положительным числом')
+        except AttributeError as er:
+            print(3)
+            print(er)
+        except TypeError as er:
+            print(4)
+            print(er)
 
     def get_a(self):
         return self.a
@@ -125,7 +148,7 @@ class Triangle(Fig):
         if self.a > 0:
             if self.b > 0:
                 if self.c > 0:
-                    if (self.a + self.b > self.c) & (self.a + self.c > self.b) & (self.b + self.c > self.a):
+                    if (self.a + self.b > self.c) and (self.a + self.c > self.b) and (self.b + self.c > self.a):
                         return print(f'треугольник со сторонами {self.a}, {self.b}, {self.c}')
                     else:
                         return print('в треугольнике сумма двух любых сторон должна быть больше третьей стороны')
@@ -144,7 +167,15 @@ class Circle(Fig):
     angles = 0
 
     def __init__(self, a: float):
-        self.a = a
+        try:
+            if a > 0:
+                self.a = a
+            else:
+                raise NotPositiveSideError('радиус не является положительным числом')
+        except AttributeError as er:
+            print(er)
+        except TypeError as er:
+            print(er)
 
     def get_a(self):
         return self.a
