@@ -36,12 +36,6 @@ class Rectangle(Fig):
         except TypeError as er:
             print(er)
 
-    def get_a(self):
-        return self.a
-
-    def get_b(self):
-        return self.b
-
     def area(self):
         if self.a > 0 and self.b > 0:
             s = self.a * self.b
@@ -57,13 +51,7 @@ class Rectangle(Fig):
             return 'параметры фигуры заданы некорректно'
 
     def info(self):
-        if self.a > 0:
-            if self.b > 0:
-                return print(f'прямоугольник со сторонами {self.a}, {self.b}')
-            else:
-                print('в прямоугольнике сторона b задана некорректно. введите положительное число')
-        else:
-            print('в прямоугольнике сторона a задана некорректно. введите положительное число')
+        return print(f'прямоугольник со сторонами {self.a}, {self.b}')
 
 
 class Square(Fig):
@@ -83,9 +71,6 @@ class Square(Fig):
         except TypeError as er:
             print(er)
 
-    def get_a(self):
-        return self.a
-
     def area(self):
         s = self.a ** 2
         return s
@@ -95,10 +80,7 @@ class Square(Fig):
         return p
 
     def info(self):
-        if self.a > 0:
-            return print(f'квадрат со сторонами {self.a}')
-        else:
-            return print('в квадрате сторона a задана некорректно. введите положительное число')
+        return print(f'квадрат со сторонами {self.a}')
 
 
 class Triangle(Fig):
@@ -114,26 +96,13 @@ class Triangle(Fig):
                     self.b = b
                     self.c = c
                 else:
-                    print(1)
                     raise IncorrectTriangleSideError('сумма двух сторон треугольника меньше третьей')
             else:
-                print(2)
                 raise NotPositiveSideError('одна из сторон треугольнака не является положительным числом')
         except AttributeError as er:
-            print(3)
             print(er)
         except TypeError as er:
-            print(4)
             print(er)
-
-    def get_a(self):
-        return self.a
-
-    def get_b(self):
-        return self.b
-
-    def get_c(self):
-        return self.c
 
     def area(self):
         half_p = (self.a + self.b + self.c) / 2.0
@@ -145,19 +114,7 @@ class Triangle(Fig):
         return p
 
     def info(self):
-        if self.a > 0:
-            if self.b > 0:
-                if self.c > 0:
-                    if (self.a + self.b > self.c) and (self.a + self.c > self.b) and (self.b + self.c > self.a):
-                        return print(f'треугольник со сторонами {self.a}, {self.b}, {self.c}')
-                    else:
-                        return print('в треугольнике сумма двух любых сторон должна быть больше третьей стороны')
-                else:
-                    return print('в треугольнике сторона c задана некорректно. введите положительное число')
-            else:
-                return print('в треугольнике сторона b задана некорректно. введите положительное число')
-        else:
-            return print('в треугольнике сторона a задана некорректно. введите положительное число')
+        return print(f'треугольник со сторонами {self.a}, {self.b}, {self.c}')
 
 
 class Circle(Fig):
@@ -177,9 +134,6 @@ class Circle(Fig):
         except TypeError as er:
             print(er)
 
-    def get_a(self):
-        return self.a
-
     def area(self):
         s = math.pi * (self.a ** 2)
         return s
@@ -189,7 +143,4 @@ class Circle(Fig):
         return p
 
     def info(self):
-        if self.a > 0:
-            return print(f'круг с радиусом {self.a}')
-        else:
-            return print('радиус круга задан некорректно. введите положительное число')
+        return print(f'круг с радиусом {self.a}')
